@@ -2,17 +2,26 @@ import React from 'react';
 
 export default function Table(props) {
     if (props.data) {
-        const headerHTML = props.headers.map( name => {
+        const grColumnsStyle = {gridTemplateColumns: `120px repeat(3, 1fr) repeat(${props.headers.length - 4}, auto)`}
+
+        const dataAreas = props.data.map( (item, indexForKey) => {
             return (
-                <b key={name} style={{'display':'inline-block', 'margin':'.2em'}}>{ name.toLowerCase() }</b> // fixme uniq id
+                <div className="App-rowWrapper" key={`${indexForKey}-row`}>
+                    { props.headers.map( (name, index) => {
+                        return <div className={ `grid-item ${(name === 'CARD' || name === 'ACC1NUM')  ? 'App-ellipsis': ''}` }
+                                    key={`${index}-cell`}>
+                            { item[index][name] }
+                        </div>
+                    }) }
+                </div>
             )
         })
 
         return (
-            <div>
-                <div>{ headerHTML }</div>
-
-                {props.data.toString()}
+            <div className="App-table">
+                <div className="grid-container" style={ grColumnsStyle }>
+                    { dataAreas }
+                </div>
             </div>
         )
     } else return (
