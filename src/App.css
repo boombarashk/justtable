@@ -30,16 +30,40 @@ body, html {
 .App-rowWrapper{
     display: contents;
     transition: text-shadow .3s;
-/*    letter-spacing: .1em;*/
 }
-.App-rowWrapper:hover > .grid-item {
+.App-rowWrapper:hover > .grid-item:not(.App-btnWrapper) {
     text-shadow: 0 0 .65px #333, 0 0 .65px #333;
+}
+.App-rowWrapper:first-child .grid-item:first-child{
+    border-top-left-radius: .4em;
+}
+.App-rowWrapper:first-child .grid-item:last-child{
+    border-top-right-radius: .4em;
+}
+.App-rowWrapper:last-child .grid-item:last-child{
+    border-bottom-right-radius: .4em;
+}
+.App-rowWrapper:last-child .grid-item:first-child{
+    border-bottom-left-radius: .4em;
 }
 
 .App-ellipsis {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.App-link {
+    color: #3463ea;
+}
+.App-btnDelete {
+    z-index: 1;
+    text-decoration: underline;
+}
+
+.App-btnDelete:hover {
+    color: #f00;
+    cursor:pointer;
 }
 
 .App {
@@ -52,8 +76,4 @@ body, html {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }

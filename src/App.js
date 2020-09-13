@@ -17,7 +17,9 @@ function App() {
     <div className="App">
       <header className="App-header"></header>
 
-      <Table data={statePersons} headers={stateMeta}/>
+      <Table handlerDelete={ (indexRow) => { handlerDelete(indexRow, statePersons, setStatePersons) }}
+             data={statePersons}
+             headers={stateMeta}/>
     </div>
   );
 }
@@ -48,6 +50,12 @@ function loadData(setStatePersons, setStateMeta){
       .catch(error => {
           console.log(error)
       })
+}
+
+function handlerDelete(indexRow, statePersons, setStatePersons) {
+    const clonePersons = statePersons.slice(0)
+    clonePersons.splice(indexRow, 1)
+    setStatePersons( clonePersons )
 }
 
 export default App;
