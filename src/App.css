@@ -1,8 +1,17 @@
 body, html {
-  margin: 0;
-  padding: 0;
-  background: #1b1b1b;
-  color: #fafafa
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+body {
+    background: #1b1b1b;
+    color: #fafafa
+}
+body > div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .grid-container {
@@ -17,14 +26,12 @@ body, html {
     padding: .2em .3em;
     background: antiquewhite;
 }
-/* fixme +1 */
+
 .grid-item:nth-child(2), .grid-item:nth-child(3), .grid-item:nth-child(4) {
     text-align: center;
 }
 
-.App-table {/*
-    overflow: hidden;
-    border-radius: .4em;*/
+.App-table {
     color: #1b1b1b;
 }
 .App-rowWrapper{
@@ -43,7 +50,8 @@ body, html {
 .App-rowWrapper:last-child .grid-item:last-child{
     border-bottom-right-radius: .4em;
 }
-.App-rowWrapper:last-child .grid-item:first-child{
+.App-rowWrapper:last-child .grid-item:first-child,
+.App-personForm-item:nth-child(2) {
     border-bottom-left-radius: .4em;
 }
 
@@ -54,26 +62,46 @@ body, html {
 }
 
 .App-link {
+    text-decoration: underline;
+    cursor: pointer;
     color: #3463ea;
+}
+
+.App-input--short {
+    width: 64px;
+}
+.App-input--middle {
+    width: 88px;
+}
+
+.App-text--center {
+    text-align: center;
+}
+.App-btnOk {
+    min-width: 54px;
 }
 .App-btnDelete {
     z-index: 1;
-    text-decoration: underline;
 }
-
-.App-btnDelete:hover {
+.App-btnDelete:hover,
+.App-btnCancel {
     color: #f00;
-    cursor:pointer;
 }
 
-.App {
+.App-personForm-item {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.App-overflow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    background: rgba(97, 80, 60, .6);
 }

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BtnDelete from "./btnDelete";
+import PersonForm from "./form";
 
 export default function Table(props) {
+    const [stateEditing, setStateEditing] = useState(false)
+
     if (props.data) {
         const grColumnsStyle = {gridTemplateColumns: `120px repeat(3, 1fr) repeat(${props.headers.length - 4}, auto) auto`}
 
-        const dataAreas = props.data.map( (item, indexRow) => {
+        const dataArea = props.data.map( (item, indexRow) => {
             return (
                 <div className="App-rowWrapper" key={`${indexRow}-row`}>
                     { props.headers.map( (name, index) => {
@@ -22,14 +25,27 @@ export default function Table(props) {
             )
         })
 
+        const formArea = stateEditing ? <div className="App-rowWrapper">
+            <PersonForm fields={ props.headers.map( name => name.toLowerCase()) }
+                        handlerToggleEditing={ () => { setStateEditing(false) }}
+                        handlerOk={ props.handlerOk }
+            />
+        </div> : null
+
         return (
+            <>
             <div className="App-table">
                 <div className="grid-container" style={ grColumnsStyle }>
-                    { dataAreas }
+                    { dataArea }
+
+                    { formArea }
                 </div>
             </div>
+
+            <p className="App-link App-text--center" onClick={ () => { setStateEditing(true) }}>Добавить персону</p>
+            </>
         )
     } else return (
-        <div className="App-loader">Загрузка..</div>
+        <div className="App-loader App-text--center">Загрузка..</div>
     )
 }
